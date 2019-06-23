@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e6aeb6de79a0478899ba689b50040df2" Name="Diagram1">
+        <EntityTypeShape EntityType="SchoolDbModel.Course" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolDbModel.Enrollment" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolDbModel.Student" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="SchoolDbModel.FK_Course_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="SchoolDbModel.FK_Course_Enrollment" ManuallyRouted="false" />
+        <AssociationConnector Association="SchoolDbModel.FK_Enrollment_Student" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SchoolDbModel.CourseInstructor" Width="1.5" PointX="5.25" PointY="4.625" />
+        <EntityTypeShape EntityType="SchoolDbModel.Department" Width="1.5" PointX="3" PointY="8.125" />
+        <EntityTypeShape EntityType="SchoolDbModel.Instructor" Width="1.5" PointX="0.75" PointY="8.125" />
+        <EntityTypeShape EntityType="SchoolDbModel.OfficeAssignments" Width="1.5" PointX="3" PointY="11.125" />
+        <AssociationConnector Association="SchoolDbModel.FK_Course_CourseInstructor" />
+        <AssociationConnector Association="SchoolDbModel.FK_Department_Course" />
+        <AssociationConnector Association="SchoolDbModel.FK_Instructor_CourseInstructor" />
+        <AssociationConnector Association="SchoolDbModel.FK_Instructor_Department" />
+        <AssociationConnector Association="SchoolDbModel.FK_Instructor_OfficeAssignments" />
+        <EntityTypeShape EntityType="SchoolDbModel.OfficeAssignment" Width="1.5" PointX="7.375" PointY="5.75" />
+        <AssociationConnector Association="SchoolDbModel.FK_OfficeAssignment_OfficeAssignment" />
+        <EntityTypeShape EntityType="SchoolDbModel.GreyFabricReceive" Width="2" PointX="7.625" PointY="1.375" />
+        <EntityTypeShape EntityType="SchoolDbModel.GreyFabricReceiveDetail" Width="2" PointX="9.875" PointY="1.625" />
+        <AssociationConnector Association="SchoolDbModel.FK_GreyFabricReceiveDetail_GreyFabricReceive" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,121 @@
+﻿@model Crud.Models.StudentMarkViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>tblStudents</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="col-md-2">Student Id</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tblStudents.Id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tblStudents.Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2">Student Name</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tblStudents.Name, new { htmlAttributes = new { @class = "form-control stdName" } })
+                @Html.ValidationMessageFor(model => model.tblStudents.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2">Regno</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tblStudents.Regno, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tblStudents.Regno, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-2">Grade</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.tblStudents.GradeId, ViewBag.Grades as SelectList, "--Select Grade--", new { @class = "form-control grade" })
+                @Html.ValidationMessageFor(model => model.tblStudents.GradeId, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label class="col-md-2">Mark</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.tblMark.Id, new SelectList(" "), "--Select Mark--", new { @class = "form-control mark" })
+            </div>
+
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script>
+    $(document).ready(function () {
+        $(".grade").change(function () {
+            $.get("/tblStudents/GetMarksList", { GradeId: $(".grade").val() }, function (data) {
+                $(".mark").empty();
+                $.each(data, function (index, row) {
+                    $(".mark").append("<option value='" + row.Id + "'>" + row.Mark + "</option>")
+                });
+            });
+        });
+        $(".stdName").autocomplete({
+            source: function (request, response) {
+
+
+                //$.post("/tblStudents/GetStudentNames", { name: $(".stdName").val() }, function (data) {
+                //    response($.map(data, function (item) {
+                //        consol.log(data);
+                //        return {
+                //            label: item.Name,
+                //            value: item.Name
+                //        }
+                //    }));
+                //});
+                $.ajax({
+                    url: "/tblStudents/GetStudentNames",
+                    data: { name: request.term },
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.Name,
+                                value: item.Name
+                            }
+                        }));
+                    }
+                })
+                alert(response);
+            }
+        });
+
+    });
+
+
+</script>
+}
+
+
